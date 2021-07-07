@@ -1,10 +1,10 @@
 import java.util.Scanner;
 import java.io.*;
 
-public class Trabalho1 {
+public class Estoque{
 	
 	//Módulo para definir Estoque
-	public static double[][] definirEstoque(double[][] dados , mascaras InfantilLisa ,mascaras InfantilEstampada , mascaras AdultaLisa , mascaras AdultaEstampada   )
+	public static double[][] definirEstoque(double[][] dados , Mascaras InfantilLisa , Mascaras InfantilEstampada , Mascaras AdultaLisa , Mascaras AdultaEstampada   )
 	{
 		
 		Scanner entrada = new Scanner(System.in);
@@ -26,7 +26,7 @@ public class Trabalho1 {
 		return dados;
 	}
 	//Módulo para preencher o preço da produção
-	public static double[][] definirCustoDeProd(mascaras InfantilLisa ,mascaras InfantilEstampada , mascaras AdultaLisa , mascaras AdultaEstampada   )
+	public static double[][] definirCustoDeProd(Mascaras InfantilLisa , Mascaras InfantilEstampada , Mascaras AdultaLisa , Mascaras AdultaEstampada)
 	{
 		double[][] dados = new double[4][5];
 		Scanner entrada = new Scanner(System.in);
@@ -47,7 +47,7 @@ public class Trabalho1 {
 		return dados;
 	}
 	//Módulo para preencher o preço de venda
-	public static double[][] precoDeVenda(mascaras InfantilLisa ,mascaras InfantilEstampada , mascaras AdultaLisa , mascaras AdultaEstampada   )
+	public static double[][] precoDeVenda(Mascaras InfantilLisa , Mascaras InfantilEstampada , Mascaras AdultaLisa , Mascaras AdultaEstampada   )
 	{
 		double[][] dados = new double[4][5];
 		Scanner entrada = new Scanner(System.in);
@@ -69,8 +69,7 @@ public class Trabalho1 {
 		
 		return dados;
 	}
-
-	//Módulo para exibir o estoque
+	//Módulo exibicao menu
 	public static void exibirEstoque(double dados[][])
 	{
 			System.out.printf("Estoque de máscaras infantis lisas : %.0f unidades\n" , dados[0][0]);
@@ -78,12 +77,8 @@ public class Trabalho1 {
 			System.out.printf("Estoque de máscaras adultas Lisas: %.0f unidades\n" , dados[2][0]);
 			System.out.printf("Estoque de máscaras adultas Lisas: %.0f unidades\n\n" , dados[3][0]);	
 	}
-	
-	
-	
-
-	
-	public static void GravarArquivo(double dados[][] , mascaras InfantilLisa ,mascaras InfantilEstampada , mascaras AdultaLisa , mascaras AdultaEstampada , int i)
+	//Módulo para exibir o estoque
+	public static void GravarArquivo(double dados[][] , Mascaras InfantilLisa , Mascaras InfantilEstampada , Mascaras AdultaLisa , Mascaras AdultaEstampada , int i)
 	{
 	try {	
 		
@@ -119,18 +114,15 @@ public class Trabalho1 {
 			String[] Masks = {"Infantil lisa: ", "Infantil Estampada: ", "Adulta Lisa: ", "Adulta Estampada: "};
 			
 			//For passando pelo pelas linhas da coluna do estoque e escrevendo no relatório o estoque de cada item
-			for(int ln = 0 ; ln < dados.length; ln++)
-			{
+			for(int ln = 0 ; ln < dados.length; ln++){
 				relatorio.write("Estoque atual de máscara "+ Masks[ln] +(int) dados[ln][0] +" UN"+"\n");
-				
 			}
 			
 			//For para calcular o lucro e escrever no relatório
 			double lucroTotal = 0;
-			for(int ln = 0; ln < dados.length; ln++)
-			{
+			for(int ln = 0; ln < dados.length; ln++){
 				lucroTotal += dados[ln][4];
-				
+
 			}
 			//Escrita do lucro no arquivo
 			relatorio.write("\nlucro total do dia: R$"+lucroTotal+"0");
@@ -146,10 +138,10 @@ public class Trabalho1 {
 	public static void main(String[] args) {
 		
 		Scanner entrada = new Scanner(System.in);
-		mascaras InfantilLisa = new mascaras();
-		mascaras InfantilEstampada = new mascaras();
-		mascaras AdultaLisa = new mascaras();
-		mascaras AdultaEstampada = new mascaras();
+		Mascaras InfantilLisa = new Mascaras();
+		Mascaras InfantilEstampada = new Mascaras();
+		Mascaras AdultaLisa = new Mascaras();
+		Mascaras AdultaEstampada = new Mascaras();
 		double[][] dados = new double[4][5];
 		int escolha = 0 ;
 			
@@ -160,90 +152,64 @@ public class Trabalho1 {
 			System.out.println();
 			System.out.println("O que deseja fazer?\n\n1 - Adicionar máscaras ao estoque\n2 - Definir custo de produção\n3 - Definir preço de venda\n4 - Exibir o estoque\n\n5 - Ir para o controle de vendas");
 			escolha = entrada.nextInt();
-		
-			switch(escolha)
-			{
-			case 1:
-				dados = definirEstoque(dados , InfantilLisa , InfantilEstampada , AdultaLisa , AdultaEstampada);
-				break;
-			case 2:
-				dados = definirCustoDeProd(InfantilLisa , InfantilEstampada , AdultaLisa , AdultaEstampada);	
-				break;
-			case 3:
-				dados = precoDeVenda(InfantilLisa , InfantilEstampada , AdultaLisa , AdultaEstampada);	
-				break;
-			case 4 :
-				exibirEstoque(dados);
-				break;
-			case 5:
-				System.out.printf("");
-				break;
-				default:System.out.print("Opção inválida\n");
+
+			switch (escolha) {
+				case 1 -> dados = definirEstoque(dados, InfantilLisa, InfantilEstampada, AdultaLisa, AdultaEstampada);
+				case 2 -> dados = definirCustoDeProd(InfantilLisa, InfantilEstampada, AdultaLisa, AdultaEstampada);
+				case 3 -> dados = precoDeVenda(InfantilLisa, InfantilEstampada, AdultaLisa, AdultaEstampada);
+				case 4 -> exibirEstoque(dados);
+				case 5 -> System.out.print("");
+				default -> System.out.print("Opção inválida\n");
 			}
 		}
 		
-//For para simular a execução do app durante alguns dias , cada repetição é um dia		
-for(int i = 1 ; i < 100; i++)
-{	System.out.println();
-	System.out.println("DIA " + i);
-	int  mascara = 0 , tipo = 0 , cont = 1;
+	//For para simular a execução do app durante alguns dias , cada repetição é um dia
+	for(int i = 1 ; i < 100; i++){
+		System.out.println();
+		System.out.println("DIA " + i);
+		int  mascara = 0 , tipo = 0 , cont = 1;
 	
-	//While para o cóigo ser executado até o usuário escolher a opção de sair	
-	while(cont != 2)
-	{	
+	//While para o cóigo ser executado até o usuário escolher a opção de sair e switch com lambda
+	while(cont != 2){
 		System.out.println("\nVendas\n1 - Registrar venda de Máscara Infantil\n2 - Registrar venda de máscara Adulta");
 		mascara = entrada.nextInt();
-		switch(mascara)
-		{
-			case 1:
-			{
-			System.out.println("Tipo de máscara: \n1 - Lisa\n2 - Estampada?");
-			tipo = entrada.nextInt();
-			switch(tipo)
-			{
-				case 1:
-				{
-					System.out.print("Foram quantas vendas de Máscara Infantil Lisa?");
-					InfantilLisa.Vendas(entrada.nextInt());
-				}
-				break;
-				case 2:
-				{
-					System.out.print("Foram quantas vendas de Máscara Infantil Estampada?");
-					InfantilEstampada.Vendas(entrada.nextInt());
-				}
-				break;
+		switch (mascara) {
+			case 1 -> {
+				System.out.println("Tipo de máscara: \n1 - Lisa\n2 - Estampada?");
+				tipo = entrada.nextInt();
+				switch (tipo) {
+					case 1 -> {
+						System.out.print("Foram quantas vendas de Máscara Infantil Lisa?");
+						InfantilLisa.Vendas(entrada.nextInt());
+					}
+					case 2 -> {
+						System.out.print("Foram quantas vendas de Máscara Infantil Estampada?");
+						InfantilEstampada.Vendas(entrada.nextInt());
+					}
 				}
 			}
-			break;
-			case 2:
-		{
-			System.out.println("Tipo de máscara: \n1 - Lisa\n2 - Estampada?");
-			tipo = entrada.nextInt();
-			switch(tipo)
-			{
-				case 1:
-					{
+			case 2 -> {
+				System.out.println("Tipo de máscara: \n1 - Lisa\n2 - Estampada?");
+				tipo = entrada.nextInt();
+				switch (tipo) {
+					case 1 -> {
 						System.out.print("Foram quantas vendas de Máscara Adulta Lisa?");
 						AdultaLisa.Vendas(entrada.nextInt());
 					}
-					break;
-				case 2:
-					{
+					case 2 -> {
 						System.out.print("Foram quantas vendas de Máscara Adulta Estampada?");
 						AdultaEstampada.Vendas(entrada.nextInt());
 					}
-					break;
-					}
 				}
-			}	
+			}
+		}
 		System.out.println();
 		System.out.println("1 - Registrar mais vendas\n2 - Encerrar dia e gerar Relatório");
 		cont = entrada.nextInt();
 		
 		
 	}
-	//Ao final do dia , será feito o relatório
+	//Ao final do dia , será feito o relatório em arquivo
 	GravarArquivo(dados , InfantilLisa , InfantilEstampada , AdultaLisa , AdultaEstampada , i);
 	
 	//A cada dia novo , será reiniciado o valor de mascaras vendidas
@@ -258,38 +224,32 @@ entrada.close();
 
 }
 
-class mascaras
-{
+class Mascaras{
 	private int estoque;
 	private double custoDeProducao;
 	private double precoDeVenda;
 	private int MascarasVendidas;
 	private double lucro;
-	
-	public mascaras()
-	{
+
+	public Mascaras(){
 		estoque = 000;
 		custoDeProducao = 000;
 		precoDeVenda = 000;
-		
 		MascarasVendidas = 000;
 		lucro = 000;
 		
 	}
 
-	public void setEstoque(int estoque)
-	{
+	public void setEstoque(int estoque){
 		if(estoque >= 0)
 		{this.estoque = estoque;}
 		else {System.out.println("\nErro - Estoque não pode ser negativo");}
-	
 	}
 	public int getEstoque()
 	{return estoque;}
 	
 	
-	public void setCustoDeProducao(double custoDeProducao )
-	{
+	public void setCustoDeProducao(double custoDeProducao ){
 		if(custoDeProducao > 0)
 		{this.custoDeProducao = custoDeProducao;}
 		else {System.out.println("\nErro - Custo de producao deve ser maior que zero");}
@@ -297,17 +257,15 @@ class mascaras
 	public double getCustoDeProducao()
 	{return custoDeProducao;}
 
-	public void setPrecoDeVenda(double precoDeVenda)
-	{	if(precoDeVenda > 0)
+	public void setPrecoDeVenda(double precoDeVenda) {
+		if(precoDeVenda > 0)
 		{this.precoDeVenda = precoDeVenda;}
 		else {System.out.println("\nErro - Preco de venda deve ser maior que zero.");}
-	
 	}
 	public double getPrecoDeVenda()
 	{return precoDeVenda;}
 
-	public  void Vendas(int vendas)
-	{
+	public  void Vendas(int vendas){
 		if(estoque >= vendas)
 		{
 			estoque -= vendas;
