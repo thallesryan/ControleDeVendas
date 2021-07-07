@@ -292,7 +292,7 @@ class mascaras
 	{
 		if(custoDeProducao > 0)
 		{this.custoDeProducao = custoDeProducao;}
-		else {System.out.println("\nErro - Custo de produção deve ser maior que zero");}
+		else {System.out.println("\nErro - Custo de producao deve ser maior que zero");}
 	}
 	public double getCustoDeProducao()
 	{return custoDeProducao;}
