@@ -206,11 +206,10 @@ public class Estoque{
 		System.out.println();
 		System.out.println("1 - Registrar mais vendas\n2- adicionar máscaras ao estoque ,encerrar dia e gerar Relatório\n\n3 - Encerrar dia e gerar Relatório");
 		cont = entrada.nextInt();
-	
-		switch(cont)
-		{
+
+		switch(cont){
 			case 2 -> {dados = definirEstoque(dados, InfantilLisa, InfantilEstampada, AdultaLisa, AdultaEstampada);	}
-		
+
 		}
 		
 	}
