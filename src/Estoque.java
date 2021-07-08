@@ -9,13 +9,13 @@ public class Estoque{
 		
 		Scanner entrada = new Scanner(System.in);
 
-		System.out.print("Qual o estoque de máscaras Infantis Lisas?");
+		System.out.print("Quantas máscaras Infantis Lisas adicionar ao estoque?");
 		InfantilLisa.setEstoque(entrada.nextInt());
-		System.out.print("Qual o estoque de máscatas Infantis Estampadas?");
+		System.out.print("Quantas máscaras Infantis Estampadas adicionar ao estoque?");
 		InfantilEstampada.setEstoque(entrada.nextInt());
-		System.out.print("Qual o estoque de máscaras Adultas Lisas?");
+		System.out.print("Quantas máscaras Adultas Lisas adicionar ao estoque?");
 		AdultaLisa.setEstoque(entrada.nextInt());
-		System.out.print("Qual o estoque de máscaras Adultas Estampadas?");
+		System.out.print("Quantas máscaras Adultas Estampadas adicionar ao estoque?");
 		AdultaEstampada.setEstoque(entrada.nextInt());
 		
 		dados[0][0] = InfantilLisa.getEstoque();
@@ -170,7 +170,7 @@ public class Estoque{
 		int  mascara = 0 , tipo = 0 , cont = 1;
 	
 	//While para o cóigo ser executado até o usuário escolher a opção de sair e switch com lambda
-	while(cont != 2){
+	while(cont != 3 && cont != 2){
 		System.out.println("\nVendas\n1 - Registrar venda de Máscara Infantil\n2 - Registrar venda de máscara Adulta");
 		mascara = entrada.nextInt();
 		switch (mascara) {
@@ -204,9 +204,14 @@ public class Estoque{
 			}
 		}
 		System.out.println();
-		System.out.println("1 - Registrar mais vendas\n2 - Encerrar dia e gerar Relatório");
+		System.out.println("1 - Registrar mais vendas\n2- adicionar máscaras ao estoque ,encerrar dia e gerar Relatório\n\n3 - Encerrar dia e gerar Relatório");
 		cont = entrada.nextInt();
+	
+		switch(cont)
+		{
+			case 2 -> {dados = definirEstoque(dados, InfantilLisa, InfantilEstampada, AdultaLisa, AdultaEstampada);	}
 		
+		}
 		
 	}
 	//Ao final do dia , será feito o relatório em arquivo
@@ -242,7 +247,7 @@ class Mascaras{
 
 	public void setEstoque(int estoque){
 		if(estoque >= 0)
-		{this.estoque = estoque;}
+		{this.estoque += estoque;}
 		else {System.out.println("\nErro - Estoque não pode ser negativo");}
 	}
 	public int getEstoque()
